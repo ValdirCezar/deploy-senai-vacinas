@@ -37,6 +37,18 @@ public class UsuarioService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não contrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));
 	}
+	
+	/*
+	 * Busca de um Usuário por E-MAIL
+	 */
+	public Usuario findByEmail(String email) {
+		Usuario obj = repository.findByEmail(email);
+		if(obj.equals(null)) {
+			throw new ObjectNotFoundException(
+					"Objeto não contrado! Id: " + email + ", Tipo: " + Usuario.class.getName());
+		}
+		return obj;
+	}
 
 	/*
 	 * Busca de todos os Usuários
