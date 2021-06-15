@@ -22,7 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.valdir.senaivacinas.domain.enums.Perfil;
 
 @Entity
@@ -59,10 +59,10 @@ public class Usuario implements Serializable {
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private Endereco endereco;
 
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "usuario")
 	private List<Agendamento> agendamentos = new ArrayList<>();
-	
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PERFIS")
 	private Set<Integer> perfis = new HashSet<>();
@@ -252,11 +252,11 @@ public class Usuario implements Serializable {
 	public void setAgendamentos(List<Agendamento> agendamentos) {
 		this.agendamentos = agendamentos;
 	}
-	
+
 	public Set<Perfil> getPerfis() {
 		return this.perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
-	
+
 	public void addPerfil(Perfil perfil) {
 		this.perfis.add(perfil.getCodigo());
 	}

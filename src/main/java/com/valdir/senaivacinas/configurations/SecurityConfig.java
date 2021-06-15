@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private JWTUtil jwtUtil;
 
 	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**" };
-	private static final String[] PUBLIC_MATCHERS_POST = { "/usuarios/**", "/login/**" };
+	private static final String[] PUBLIC_MATCHERS_POST = { "/usuarios/**" };
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -51,15 +51,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors();
 		http.csrf().disable();
 
-		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll()
-				.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll().anyRequest().authenticated();
+		http.authorizeRequests()
+				.antMatchers(PUBLIC_MATCHERS).permitAll()
+				.antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
+				.anyRequest().authenticated();
 
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
 		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
+		
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
 	}
-
+ 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
