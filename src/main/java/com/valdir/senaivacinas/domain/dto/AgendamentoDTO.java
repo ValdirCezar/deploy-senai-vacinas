@@ -5,14 +5,13 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.valdir.senaivacinas.domain.Agendamento;
-import com.valdir.senaivacinas.domain.UnidadeAtendimento;
 
 public class AgendamentoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date data;
 	private Boolean finalizado;
 	private String observacoes;
