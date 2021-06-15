@@ -6,7 +6,6 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.valdir.senaivacinas.domain.Agendamento;
 import com.valdir.senaivacinas.domain.UnidadeAtendimento;
-import com.valdir.senaivacinas.domain.Usuario;
 
 public class AgendamentoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,8 +17,8 @@ public class AgendamentoDTO implements Serializable {
 	private Boolean finalizado;
 	private String observacoes;
 
-	private Usuario usuario;
-	private UnidadeAtendimento unidadeAtendimento;
+	private Integer usuario;
+	private Integer unidadeAtendimento;
 
 	public AgendamentoDTO() {
 		super();
@@ -31,8 +30,8 @@ public class AgendamentoDTO implements Serializable {
 		this.data = obj.getData();
 		this.finalizado = obj.getFinalizado();
 		this.observacoes = obj.getObservações();
-		this.usuario = obj.getUsuario();
-		this.unidadeAtendimento = obj.getUnidadeAtendimento();
+		this.usuario = obj.getUsuario().getId();
+		this.unidadeAtendimento = obj.getUnidadeAtendimento().getId();
 	}
 
 	public static Agendamento toModel(AgendamentoDTO obj) {
@@ -76,19 +75,19 @@ public class AgendamentoDTO implements Serializable {
 		this.observacoes = observações;
 	}
 
-	public Usuario getUsuario() {
+	public Integer getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(Integer usuario) {
 		this.usuario = usuario;
 	}
 
-	public UnidadeAtendimento getUnidadeAtendimento() {
+	public Integer getUnidadeAtendimento() {
 		return unidadeAtendimento;
 	}
 
-	public void setUnidadeAtendimento(UnidadeAtendimento unidadeAtendimento) {
+	public void setUnidadeAtendimento(Integer unidadeAtendimento) {
 		this.unidadeAtendimento = unidadeAtendimento;
 	}
 

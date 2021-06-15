@@ -62,9 +62,9 @@ public class AgendamentoService {
 	 */
 	private Agendamento updateData(AgendamentoDTO obj) {
 		obj.setId(null);
-		Usuario user = usuarioService.findById(obj.getUsuario().getId());
+		Usuario user = usuarioService.findById(obj.getUsuario());
 		System.out.println(user.getNome());
-		UnidadeAtendimento unidadeAtendimento = unidadeService.findById(obj.getUnidadeAtendimento().getId());
+		UnidadeAtendimento unidadeAtendimento = unidadeService.findById(obj.getUnidadeAtendimento());
 		Agendamento newObj = AgendamentoDTO.toModel(obj);
 
 		newObj.setUsuario(user);
